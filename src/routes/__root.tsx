@@ -77,14 +77,15 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "LafNova — AI Caption Editor for English, Hinglish & Urdu" },
+      { name: "description", content: "Create, edit and animate professional captions in English, Roman Hinglish and Urdu. Export MP4, SRT and ASS from your Windows PC — no watermark." },
+      { name: "author", content: "LafNova" },
+      { property: "og:title", content: "LafNova — Viral captions for the way you actually speak" },
+      { property: "og:description", content: "AI caption editor for Reels, Shorts, TikTok and podcasts. English, Roman Hinglish and Urdu/Nastaliq. Windows 10/11." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:title", content: "LafNova — AI Caption Editor" },
+      { name: "twitter:description", content: "Viral captions in English, Roman Hinglish and Urdu — for Windows." },
     ],
     links: [
       {
