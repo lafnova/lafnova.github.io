@@ -9,4 +9,8 @@ export default defineConfig({
     },
     pages: [{ path: "/" }],
   },
+  nitro: {
+    preset: "static",
+    output: { dir: ".output", publicDir: ".output/public", serverDir: ".output/server" },
+  },
 });
