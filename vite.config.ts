@@ -1,14 +1,6 @@
 import { defineConfig } from 'vite'
-import { tanstackStartVite } from '@tanstack/start-vite'
+import react from '@vitejs/plugin-react'
 
 export default defineConfig({
-  plugins: [
-    tanstackStartVite({
-      // This tells your project to generate static HTML files
-      // suitable for GitHub Pages hosting.
-      experimental: {
-        prerender: true,
-      },
-    }),
-  ],
+  plugins: [react()],
 })
