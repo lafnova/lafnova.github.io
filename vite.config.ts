@@ -9,8 +9,11 @@ export default defineConfig({
     },
     pages: [{ path: "/" }],
   },
-  nitro: {
-    preset: "static",
-    output: { dir: ".output", publicDir: ".output/public", serverDir: ".output/server" },
+  nitro: false,
+  vite: {
+    environments: {
+      client: { build: { outDir: ".output/public" } },
+      server: { build: { outDir: ".output/server" } },
+    },
   },
 });
