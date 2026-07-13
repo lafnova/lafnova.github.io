@@ -39,9 +39,9 @@ jobs:
 
       - name: Prepare website files
         run: |
-          test -f dist/index.html
-          touch dist/.nojekyll
-          cp dist/index.html dist/404.html
+          test -f .output/public/index.html
+          touch .output/public/.nojekyll
+          cp .output/public/index.html .output/public/404.html
 
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v6
@@ -49,7 +49,7 @@ jobs:
       - name: Upload website
         uses: actions/upload-pages-artifact@v5
         with:
-          path: "./dist"
+          path: "./.output/public"
 
       - name: Deploy website
         id: deployment
