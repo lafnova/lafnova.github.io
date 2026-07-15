@@ -696,14 +696,18 @@ function Buy() {
               </div>
               <div className="glass-card rounded-2xl p-6 md:p-8 min-w-[260px] text-center">
                 <div className="text-xs uppercase tracking-widest text-muted-foreground">One-time purchase</div>
-                <div className="mt-3 text-5xl font-black text-white">[PRICE]</div>
+                <div className="mt-3 text-5xl font-black text-white">{PRICE}</div>
                 <div className="mt-1 text-xs text-muted-foreground">Windows 10/11 · lifetime license</div>
-                <a
-                  href={CHECKOUT_URL}
-                  className="neon-btn mt-6 inline-flex w-full items-center justify-center gap-2 rounded-xl px-6 py-4 text-base font-black"
-                >
-                  <Download size={18} /> Buy LafNova Now
-                </a>
+                <div className="mt-6">
+                  <PurchaseButton
+                    className="neon-btn inline-flex w-full items-center justify-center gap-2 rounded-xl px-6 py-4 text-base font-black"
+                    icon={<Download size={18} />}
+                    showNote
+                  />
+                </div>
+                <p className="mt-4 text-xs text-muted-foreground">
+                  AI transcription requires an internet connection and your own Deepgram API key. Easy setup instructions are included.
+                </p>
                 <div className="mt-4 flex items-center justify-center gap-2 text-xs text-muted-foreground">
                   <ShieldCheck size={12} /> Secure checkout
                 </div>
