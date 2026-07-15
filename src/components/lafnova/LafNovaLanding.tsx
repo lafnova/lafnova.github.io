@@ -2,11 +2,58 @@ import { useEffect, useRef, useState } from "react";
 import {
   Play, Check, Menu, X, Sparkles, Wand2, Languages, Scissors,
   MonitorPlay, FileDown, Instagram, Youtube, Music2, Mic, User,
-  Briefcase, Upload, Palette, Download, ChevronDown, Github,
+  Briefcase, Upload, Palette, Download, ChevronDown,
   ShieldCheck, Zap, Type,
 } from "lucide-react";
 
-const CHECKOUT_URL = "https://YOUR-CHECKOUT-LINK";
+const CHECKOUT_URL = "";
+const PRICE = "$29";
+const CHECKOUT_ENABLED = CHECKOUT_URL.trim().length > 0;
+const BUY_LABEL = CHECKOUT_ENABLED ? `Buy LafNova for ${PRICE}` : "Launching Soon — Verification Pending";
+const PENDING_NOTE = "LafNova is ready. Secure checkout will open after our payment store is approved.";
+
+function PurchaseButton({
+  className = "",
+  children,
+  showNote = false,
+  icon = null,
+}: {
+  className?: string;
+  children?: React.ReactNode;
+  showNote?: boolean;
+  icon?: React.ReactNode;
+}) {
+  const label = children ?? (
+    <>
+      {icon}
+      {CHECKOUT_ENABLED ? `Buy LafNova for ${PRICE}` : "Launching Soon — Verification Pending"}
+    </>
+  );
+  const btn = CHECKOUT_ENABLED ? (
+    <a href={CHECKOUT_URL} className={className}>
+      {label}
+    </a>
+  ) : (
+    <button
+      type="button"
+      disabled
+      aria-disabled="true"
+      title="Checkout will open after our payment store is approved"
+      className={`${className} opacity-60 cursor-not-allowed pointer-events-none`}
+    >
+      {label}
+    </button>
+  );
+  if (!showNote) return btn;
+  return (
+    <div className="w-full">
+      {btn}
+      {!CHECKOUT_ENABLED && (
+        <p className="mt-3 text-xs text-muted-foreground text-center">{PENDING_NOTE}</p>
+      )}
+    </div>
+  );
+}
 
 /* ---------- Logo ---------- */
 function Logo({ compact = false }: { compact?: boolean }) {
@@ -94,12 +141,7 @@ function Nav() {
           ))}
         </ul>
         <div className="hidden md:flex items-center gap-3">
-          <a
-            href={CHECKOUT_URL}
-            className="neon-btn inline-flex items-center gap-2 rounded-xl px-4 py-2 text-sm font-bold"
-          >
-            Buy Now
-          </a>
+          <PurchaseButton className="neon-btn inline-flex items-center gap-2 rounded-xl px-4 py-2 text-sm font-bold" />
         </div>
         <button
           className="md:hidden text-white p-2"
@@ -124,12 +166,7 @@ function Nav() {
               </li>
             ))}
             <li>
-              <a
-                href={CHECKOUT_URL}
-                className="neon-btn block text-center rounded-xl px-4 py-3 text-sm font-bold mt-2"
-              >
-                Buy Now
-              </a>
+              <PurchaseButton className="neon-btn block text-center rounded-xl px-4 py-3 text-sm font-bold mt-2" />
             </li>
           </ul>
         </div>
@@ -268,9 +305,10 @@ function Hero() {
               export polished videos directly from your Windows computer.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <a href={CHECKOUT_URL} className="neon-btn inline-flex items-center gap-2 rounded-xl px-6 py-3.5 font-bold">
-                <Download size={18} /> Buy LafNova for Windows
-              </a>
+              <PurchaseButton
+                className="neon-btn inline-flex items-center gap-2 rounded-xl px-6 py-3.5 font-bold"
+                icon={<Download size={18} />}
+              />
               <a href="#demo" className="inline-flex items-center gap-2 rounded-xl px-6 py-3.5 font-semibold border border-white/15 bg-white/[0.03] text-white hover:bg-white/[0.06] transition">
                 <Play size={18} /> Watch Demo
               </a>
@@ -658,14 +696,18 @@ function Buy() {
               </div>
               <div className="glass-card rounded-2xl p-6 md:p-8 min-w-[260px] text-center">
                 <div className="text-xs uppercase tracking-widest text-muted-foreground">One-time purchase</div>
-                <div className="mt-3 text-5xl font-black text-white">[PRICE]</div>
+                <div className="mt-3 text-5xl font-black text-white">{PRICE}</div>
                 <div className="mt-1 text-xs text-muted-foreground">Windows 10/11 · lifetime license</div>
-                <a
-                  href={CHECKOUT_URL}
-                  className="neon-btn mt-6 inline-flex w-full items-center justify-center gap-2 rounded-xl px-6 py-4 text-base font-black"
-                >
-                  <Download size={18} /> Buy LafNova Now
-                </a>
+                <div className="mt-6">
+                  <PurchaseButton
+                    className="neon-btn inline-flex w-full items-center justify-center gap-2 rounded-xl px-6 py-4 text-base font-black"
+                    icon={<Download size={18} />}
+                    showNote
+                  />
+                </div>
+                <p className="mt-4 text-xs text-muted-foreground">
+                  AI transcription requires an internet connection and your own Deepgram API key. Easy setup instructions are included.
+                </p>
                 <div className="mt-4 flex items-center justify-center gap-2 text-xs text-muted-foreground">
                   <ShieldCheck size={12} /> Secure checkout
                 </div>
@@ -736,14 +778,15 @@ function FAQ() {
 /* ---------- Footer ---------- */
 function Footer() {
   const links = [
-    { label: "Privacy", href: "#" },
-    { label: "Terms", href: "#" },
-    { label: "Support", href: "#" },
-    { label: "Contact", href: "#" },
+    { label: "Privacy Policy" },
+    { label: "Terms of Use" },
+    { label: "Refund Policy" },
+    { label: "Support" },
+    { label: "Contact" },
   ];
   return (
     <footer className="border-t border-white/10 mt-10">
-      <div className="max-w-7xl mx-auto px-5 sm:px-8 py-12 grid gap-8 md:grid-cols-[1.5fr_1fr_1fr] items-start">
+      <div className="max-w-7xl mx-auto px-5 sm:px-8 py-12 grid gap-8 md:grid-cols-[1.5fr_1fr] items-start">
         <div>
           <Logo />
           <p className="mt-4 text-sm text-muted-foreground max-w-sm">
@@ -758,18 +801,15 @@ function Footer() {
           <ul className="space-y-2 text-sm">
             {links.map((l) => (
               <li key={l.label}>
-                <a href={l.href} className="text-muted-foreground hover:text-white transition">
+                <span className="text-muted-foreground inline-flex items-center gap-2">
                   {l.label}
-                </a>
+                  <span className="text-[10px] uppercase tracking-widest text-white/40 border border-white/10 rounded-full px-2 py-0.5">
+                    Coming before launch
+                  </span>
+                </span>
               </li>
             ))}
           </ul>
-        </div>
-        <div>
-          <div className="text-xs uppercase tracking-widest text-white/60 mb-3">Connect</div>
-          <a href="#" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-white transition">
-            <Github size={16} /> GitHub
-          </a>
         </div>
       </div>
       <div className="border-t border-white/10">
