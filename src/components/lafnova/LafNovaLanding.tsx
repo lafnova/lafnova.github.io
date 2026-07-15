@@ -778,14 +778,15 @@ function FAQ() {
 /* ---------- Footer ---------- */
 function Footer() {
   const links = [
-    { label: "Privacy", href: "#" },
-    { label: "Terms", href: "#" },
-    { label: "Support", href: "#" },
-    { label: "Contact", href: "#" },
+    { label: "Privacy Policy" },
+    { label: "Terms of Use" },
+    { label: "Refund Policy" },
+    { label: "Support" },
+    { label: "Contact" },
   ];
   return (
     <footer className="border-t border-white/10 mt-10">
-      <div className="max-w-7xl mx-auto px-5 sm:px-8 py-12 grid gap-8 md:grid-cols-[1.5fr_1fr_1fr] items-start">
+      <div className="max-w-7xl mx-auto px-5 sm:px-8 py-12 grid gap-8 md:grid-cols-[1.5fr_1fr] items-start">
         <div>
           <Logo />
           <p className="mt-4 text-sm text-muted-foreground max-w-sm">
@@ -800,18 +801,15 @@ function Footer() {
           <ul className="space-y-2 text-sm">
             {links.map((l) => (
               <li key={l.label}>
-                <a href={l.href} className="text-muted-foreground hover:text-white transition">
+                <span className="text-muted-foreground inline-flex items-center gap-2">
                   {l.label}
-                </a>
+                  <span className="text-[10px] uppercase tracking-widest text-white/40 border border-white/10 rounded-full px-2 py-0.5">
+                    Coming before launch
+                  </span>
+                </span>
               </li>
             ))}
           </ul>
-        </div>
-        <div>
-          <div className="text-xs uppercase tracking-widest text-white/60 mb-3">Connect</div>
-          <a href="#" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-white transition">
-            <Github size={16} /> GitHub
-          </a>
         </div>
       </div>
       <div className="border-t border-white/10">
